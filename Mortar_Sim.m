@@ -166,10 +166,6 @@ Opt = odeset('Events', @myEvent);
 %Calcualte orientation angles
 alpha=acosd(x(:,2)./((x(:,1).^2+x(:,2).^2+x(:,3).^2).^0.5));
 beta=acosd(x(:,3)./((x(:,1).^2+x(:,2).^2+x(:,3).^2).^0.5));
-%Angle1 is the angle of the munition in the x-y plane.
-%Angle 2 is the angle in x-z plane.
-angle1=atand(x(:,2)./x(:,1));
-angle2=atand(x(:,3)./x(:,1));
 
 %Find the appogee of the munition's flight.
 [max_ht,I]=max(x(:,11));
