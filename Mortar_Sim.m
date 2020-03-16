@@ -67,13 +67,13 @@ cmqa2_wpn=xlsread('Aerodynamic_Char_120mm_Mortar.xlsx','A76:B83');
 %% Intial conditions
 Vo_set = 100; %initial vel at muzzle exit in m/s
 phi_0_set = 45; %vertical angle of departure in deg (pos up)
-theta_0_set = 10;  %horizontal angle of departure in deg(pos to right)
+theta_0_set = 0;  %horizontal angle of departure in deg(pos to right)
 
 w_z0_set=0; %initial pitch rate in rad/s (pos nose up)
 w_y0_set=0; %initial transverse yaw rate in rad/s (pos for left yaw)
 
-alpha_0_set = -5; %Pitch angle at muzzle exit in deg
-beta_0_set= 10; %initial yaw angle at muzzle exit in deg
+alpha_0_set = 0; %Pitch angle at muzzle exit in deg
+beta_0_set= 0; %initial yaw angle at muzzle exit in deg
 
 %initial position of munition center of gravity (CG) wrt intertial frame
 x_0 = 0; % x-axis (m) - range direction
@@ -191,15 +191,16 @@ impact_alpha = interp1(x(I:end,11),alpha(I:end),0);
 impact_beta = interp1(x(I:end,11),beta(I:end),0);
 
 %Create 3D vector of impact direction
-impactVect_x_coord = cos(impact_beta)*cos(impact_alpha);
-impactVect_y_coord = sin(impact_beta)*cos(impact_alpha);
-impactVect_z_coord = sin(impact_alpha);
+impactVect_x_coord = cosd(impact_beta)*cosd(impact_alpha);
+impactVect_y_coord = sind(impact_beta)*cosd(impact_alpha);
+impactVect_z_coord = sind(impact_alpha);
 impactVect = [impactVect_x_coord, impactVect_y_coord, impactVect_z_coord];
 
 vert = [0,1,0]; %vertical vector pointing down
 
 %Find total 3D impact angle in degrees using dot product
-impact_angle = acosd(dot(vert,impactVect)/(norm(vert)*norm(impactVect)));
+impact_angle = acosd(dot(vert,impactVect)/(norm(vert)*...
+    norm(impactVect))) - 90;
 
 %Find the impact valocity in all three axises and then
 %combine to get total impact velocity.
@@ -212,6 +213,16 @@ impact_vel=sqrt(vel_x_imp^2+vel_y_imp^2+vel_z_imp^2);
 %into account distance in the range (x-direction) and cross-range
 %(z-direction).
 total_dis = sqrt(x(:,10).^2 + x(:,12).^2);
+
+%Find total distance at impact
+total_dis_imact = interp1(x(I:end,11),total_dis(I:end),0);
+
+%% Outputs
+disp(['Total distance traveled = ',num2str(total_dis_imact),' meters'])
+disp(['Impact angle = ',num2str(impact_angle),' degrees'])
+disp(['Impact velocity = ',num2str(impact_vel),' m/s'])
+disp(['Range along x-axis at impact = ',num2str(range),' m'])
+disp(['Cross-range along z-axis at impact = ',num2str(cross_range),' m'])
 
 %Plots
 figure()
