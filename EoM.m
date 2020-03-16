@@ -1,6 +1,5 @@
 function dx=EoM(t,x)
 %% Documentation
-%Classification: Unclassified
 %Program writen by: Brian Wade
 %Date 9 Sept 2015
 

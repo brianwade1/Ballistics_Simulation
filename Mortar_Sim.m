@@ -1,3 +1,18 @@
+%% Documentation
+%Program writen by: Brian Wade
+%Date 9 Sept 2015
+
+%% Description and setup
+%This program runs as a subprogram of the TBM_Flight.m program.  This
+%function solves the 12 simultatious ordinary differential equations that
+%describe the ballistic motion of a projectile. These equations are based 
+%on the equations found in McCoy, 1998 (see citation below).  The input
+%aerodynamic coefficeints are from McCoy's book as well.
+
+%Input data from: 
+%1. McCoy, RL, Modern Exerioor Balistics: The Launch and Flight Dynamics 
+%of Symmetric Projectiles, Schiffer Military History, Atglen, PA, 1998.
+
 
 %% Program setup
 clear
