@@ -203,7 +203,7 @@ impactVect = [impactVect_x_coord, impactVect_y_coord, impactVect_z_coord];
 vert = [0,1,0]; %vertical vector pointing down
 
 %Find total 3D impact angle in degrees using dot product
-impact_angle = acosd(dot(vert,impactVect));
+impact_angle = acosd(dot(vert,impactVect)/(norm(vert)*norm(impactVect)));
 
 %Find the impact valocity in all three axises and then
 %combine to get total impact velocity.
@@ -239,7 +239,7 @@ grid on
 xlabel('range (m)')
 ylabel('cross-range(m)')
 
-end_time = toc(start_time);Mo
+end_time = toc(start_time);
 
 %% Termination function for ODE. 
 %Terminate when altitude is less than 0 meaning that the munition impacted
