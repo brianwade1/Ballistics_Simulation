@@ -9,7 +9,7 @@
 %aerodynamic coefficeints are from McCoy's book as well.
 
 %Input data from: 
-%1. McCoy, RL, Modern Exerioor Balistics: The Launch and Flight Dynamics 
+%1. McCoy, RL, Modern Exterior Ballistics: The Launch and Flight Dynamics 
 %of Symmetric Projectiles, Schiffer Military History, Atglen, PA, 1998.
 
 
@@ -45,15 +45,15 @@ R=6371220; %Radius of earth in meters
 %read standard atmosphere tables
 std_atm=readmatrix('std_atm.csv','Range','A2:k43');
     
-%Weapon charicteristics - These are the properties of the submunissions.
-%These weapons charicteristics are from McCoy, 1998.  See citation above.
+% Weapon charicteristics - These are the properties of the submunissions.
+% These weapons charicteristics are from McCoy, 1998.  See citation above.
 d=119.56/1000; %diameter in m
 Ip=0.02335; %Axial moment of inertia kg*m^2
 It=0.23187; %Transverse moment of inertia kg*m^2
 m=13.585; %mass in kg
 
-%Read subminition charicteristics from excel file.  %These weapon 
-%charicteristics are from McCoy, 1998.  See citation above.  
+% Read subminition charicteristics from excel file.  %These weapon 
+% charicteristics are from McCoy, 1998.  See citation above.  
 cdo_wpn=xlsread('Aerodynamic_Char_120mm_Mortar.xlsx','A5:B11');
 cd2_wpn=xlsread('Aerodynamic_Char_120mm_Mortar.xlsx','A15:B22');
 clo_wpn=xlsread('Aerodynamic_Char_120mm_Mortar.xlsx','A26:B30');
@@ -67,13 +67,13 @@ cmqa2_wpn=xlsread('Aerodynamic_Char_120mm_Mortar.xlsx','A76:B83');
 %% Intial conditions
 Vo_set = 100; %initial vel at muzzle exit in m/s
 phi_0_set = 45; %vertical angle of departure in deg (pos up)
-theta_0_set = 0;  %horizontal angle of departure in deg(pos to right)
+theta_0_set = 15;  %horizontal angle of departure in deg(pos to right)
 
-w_z0_set=0; %initial pitch rate in rad/s (pos nose up)
-w_y0_set=0; %initial transverse yaw rate in rad/s (pos for left yaw)
+w_z0_set=1; %initial pitch rate in rad/s (pos nose up)
+w_y0_set=0.5; %initial transverse yaw rate in rad/s (pos for left yaw)
 
-alpha_0_set = 0; %Pitch angle at muzzle exit in deg
-beta_0_set= 0; %initial yaw angle at muzzle exit in deg
+alpha_0_set = 2; %Pitch angle at muzzle exit in deg
+beta_0_set= -0.5; %initial yaw angle at muzzle exit in deg
 
 %initial position of munition center of gravity (CG) wrt intertial frame
 x_0 = 0; % x-axis (m) - range direction
@@ -252,9 +252,10 @@ end_time = toc(start_time);
 %Terminate when altitude is less than 0 meaning that the munition impacted
 %the ground.
 function [value, isterminal, direction] = myEvent(t, y)
-    value      = (y(11) < 0);
+    %value      = (y(11) < 0);
+    value      = y(11);
     isterminal = 1;   % Stop the integration
-    direction  = 0;
+    direction  = -1;
 end
 
     
