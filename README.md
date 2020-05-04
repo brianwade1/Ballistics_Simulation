@@ -19,7 +19,7 @@ The simulation is setup, run, and controlled from the Mortar_Sim.m file. This ma
 
 The simulation is setup from within the main program ([Mortar_Sim.m](Mortar_Sim.m)). The simulation parameters are set in lines 68-81. These lines set the initial conditions of the mortar round as it exits the mortar tube and enters free flight.
 
-![initial_conditions](/images/initial_conditions.png)
+![initial_conditions](/images/initial_conditions_set.png)
 
 The first variable (Vo_set) is the initial velocity at the barrel exit in meters per second. The next variable (phi_0_set) is the vertical angle of departure with respect to the inertial frame in degrees (this is the angle of the mortar tub measured from the horizontal ground plane). The third variable (theta_0_set) is the horizontal angle of departure in degrees (this is the angle of the mortar tub measured from a vertical plan perpendicular to the ground and along the x-axis).
 
