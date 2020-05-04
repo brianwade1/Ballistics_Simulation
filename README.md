@@ -4,7 +4,7 @@
 
 ![Sample Output](/images/output.png)
 
-![Sample Output](/images/output_console.png)
+![Sample Output](/images/console_output.png)
 
 ## Files
 
